@@ -326,7 +326,7 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 
 		if ( false === $items ) {
 			$items = $wpdb->get_results(
-				$wpdb->prepare( "SELECT order_item_type, order_item_id, order_id, order_item_name FROM {$wpdb->prefix}woocommerce_order_items WHERE order_id = %d ORDER BY order_item_id;", $order->get_id() )
+				$wpdb->prepare( "SELECT order_item_type, order_item_id, order_id, order_item_name FROM 6woo_{$wpdb->prefix}woocommerce_order_items WHERE order_id = %d ORDER BY order_item_id;", $order->get_id() )
 			);
 			foreach ( $items as $item ) {
 				wp_cache_set( 'item-' . $item->order_item_id, $item, 'order-items' );
@@ -354,11 +354,11 @@ abstract class Abstract_WC_Order_Data_Store_CPT extends WC_Data_Store_WP impleme
 	public function delete_items( $order, $type = null ) {
 		global $wpdb;
 		if ( ! empty( $type ) ) {
-			$wpdb->query( $wpdb->prepare( "DELETE FROM itemmeta USING {$wpdb->prefix}woocommerce_order_itemmeta itemmeta INNER JOIN {$wpdb->prefix}woocommerce_order_items items WHERE itemmeta.order_item_id = items.order_item_id AND items.order_id = %d AND items.order_item_type = %s", $order->get_id(), $type ) );
-			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}woocommerce_order_items WHERE order_id = %d AND order_item_type = %s", $order->get_id(), $type ) );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM itemmeta USING 6woo_{$wpdb->prefix}woocommerce_order_itemmeta itemmeta INNER JOIN 6woo_{$wpdb->prefix}woocommerce_order_items items WHERE itemmeta.order_item_id = items.order_item_id AND items.order_id = %d AND items.order_item_type = %s", $order->get_id(), $type ) );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM 6woo_{$wpdb->prefix}woocommerce_order_items WHERE order_id = %d AND order_item_type = %s", $order->get_id(), $type ) );
 		} else {
-			$wpdb->query( $wpdb->prepare( "DELETE FROM itemmeta USING {$wpdb->prefix}woocommerce_order_itemmeta itemmeta INNER JOIN {$wpdb->prefix}woocommerce_order_items items WHERE itemmeta.order_item_id = items.order_item_id and items.order_id = %d", $order->get_id() ) );
-			$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}woocommerce_order_items WHERE order_id = %d", $order->get_id() ) );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM itemmeta USING 6woo_{$wpdb->prefix}woocommerce_order_itemmeta itemmeta INNER JOIN 6woo_{$wpdb->prefix}woocommerce_order_items items WHERE itemmeta.order_item_id = items.order_item_id and items.order_id = %d", $order->get_id() ) );
+			$wpdb->query( $wpdb->prepare( "DELETE FROM 6woo_{$wpdb->prefix}woocommerce_order_items WHERE order_id = %d", $order->get_id() ) );
 		}
 		$this->clear_caches( $order );
 	}

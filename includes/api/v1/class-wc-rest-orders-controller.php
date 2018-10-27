@@ -419,8 +419,8 @@ class WC_REST_Orders_V1_Controller extends WC_REST_Posts_Controller {
 		if ( ! empty( $request['product'] ) ) {
 			$order_ids = $wpdb->get_col( $wpdb->prepare( "
 				SELECT order_id
-				FROM {$wpdb->prefix}woocommerce_order_items
-				WHERE order_item_id IN ( SELECT order_item_id FROM {$wpdb->prefix}woocommerce_order_itemmeta WHERE meta_key = '_product_id' AND meta_value = %d )
+				FROM 6woo_{$wpdb->prefix}woocommerce_order_items
+				WHERE order_item_id IN ( SELECT order_item_id FROM 6woo_{$wpdb->prefix}woocommerce_order_itemmeta WHERE meta_key = '_product_id' AND meta_value = %d )
 				AND order_item_type = 'line_item'
 			 ", $request['product'] ) );
 
@@ -769,7 +769,7 @@ class WC_REST_Orders_V1_Controller extends WC_REST_Posts_Controller {
 		// Verify provided line item ID is associated with order.
 		if ( 'update' === $action ) {
 			$result = $wpdb->get_row(
-				$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d AND order_id = %d",
+				$wpdb->prepare( "SELECT * FROM 6woo_{$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d AND order_id = %d",
 				absint( $posted['id'] ),
 				absint( $order->get_id() )
 			) );

@@ -636,7 +636,7 @@ final class WooCommerce {
 	public function wpdb_table_fix() {
 		global $wpdb;
 		$wpdb->payment_tokenmeta = $wpdb->prefix . 'woocommerce_payment_tokenmeta';
-		$wpdb->order_itemmeta    = $wpdb->prefix . 'woocommerce_order_itemmeta';
+		$wpdb->order_itemmeta    = "6woo_".$wpdb->prefix."woocommerce_order_itemmeta";
 		$wpdb->tables[]          = 'woocommerce_payment_tokenmeta';
 		$wpdb->tables[]          = 'woocommerce_order_itemmeta';
 

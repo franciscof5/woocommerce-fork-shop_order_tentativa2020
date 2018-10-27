@@ -797,9 +797,9 @@ class WC_Cart extends WC_Legacy_Cart {
 					$wpdb->prepare( "
 						SELECT SUM( order_item_meta.meta_value ) AS held_qty
 						FROM {$wpdb->posts} AS posts
-						LEFT JOIN {$wpdb->prefix}woocommerce_order_items as order_items ON posts.ID = order_items.order_id
-						LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
-						LEFT JOIN {$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta2 ON order_items.order_item_id = order_item_meta2.order_item_id
+						LEFT JOIN 6woo_{$wpdb->prefix}woocommerce_order_items as order_items ON posts.ID = order_items.order_id
+						LEFT JOIN 6woo_{$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta ON order_items.order_item_id = order_item_meta.order_item_id
+						LEFT JOIN 6woo_{$wpdb->prefix}woocommerce_order_itemmeta as order_item_meta2 ON order_items.order_item_id = order_item_meta2.order_item_id
 						WHERE 	order_item_meta.meta_key   = '_qty'
 						AND 	order_item_meta2.meta_key  = %s AND order_item_meta2.meta_value  = %d
 						AND 	posts.post_type            IN ( '" . implode( "','", wc_get_order_types() ) . "' )

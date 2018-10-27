@@ -888,7 +888,7 @@ class WC_API_Orders extends WC_API_Resource {
 		if ( 'update' === $action ) {
 
 			$result = $wpdb->get_row(
-				$wpdb->prepare( "SELECT * FROM {$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d AND order_id = %d",
+				$wpdb->prepare( "SELECT * FROM 6woo_{$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d AND order_id = %d",
 				absint( $item['id'] ),
 				absint( $order->get_id() )
 			) );

@@ -473,7 +473,7 @@ abstract class WC_Abstract_Legacy_Order extends WC_Data {
 		wc_deprecated_function( 'WC_Order::has_meta( $order_item_id )', '3.0', 'WC_Order_item::get_meta_data' );
 
 		return $wpdb->get_results( $wpdb->prepare( "SELECT meta_key, meta_value, meta_id, order_item_id
-			FROM {$wpdb->prefix}woocommerce_order_itemmeta WHERE order_item_id = %d
+			FROM 6woo_{$wpdb->prefix}woocommerce_order_itemmeta WHERE order_item_id = %d
 			ORDER BY meta_id", absint( $order_item_id ) ), ARRAY_A );
 	}
 

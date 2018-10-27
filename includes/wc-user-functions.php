@@ -243,8 +243,8 @@ function wc_customer_bought_product( $customer_email, $user_id, $product_id ) {
 		$result = $wpdb->get_col( "
 			SELECT im.meta_value FROM {$wpdb->posts} AS p
 			INNER JOIN {$wpdb->postmeta} AS pm ON p.ID = pm.post_id
-			INNER JOIN {$wpdb->prefix}woocommerce_order_items AS i ON p.ID = i.order_id
-			INNER JOIN {$wpdb->prefix}woocommerce_order_itemmeta AS im ON i.order_item_id = im.order_item_id
+			INNER JOIN 6woo_{$wpdb->prefix}woocommerce_order_items AS i ON p.ID = i.order_id
+			INNER JOIN 6woo_{$wpdb->prefix}woocommerce_order_itemmeta AS im ON i.order_item_id = im.order_item_id
 			WHERE p.post_status IN ( 'wc-" . implode( "','wc-", $statuses ) . "' )
 			AND pm.meta_key IN ( '_billing_email', '_customer_user' )
 			AND im.meta_key IN ( '_product_id', '_variation_id' )

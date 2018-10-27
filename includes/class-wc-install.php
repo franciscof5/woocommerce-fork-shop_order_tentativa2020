@@ -602,7 +602,7 @@ CREATE TABLE {$wpdb->prefix}woocommerce_downloadable_product_permissions (
   KEY download_order_product (download_id,order_id,product_id),
   KEY order_id (order_id)
 ) $collate;
-CREATE TABLE {$wpdb->prefix}woocommerce_order_items (
+CREATE TABLE 6woo_{$wpdb->prefix}woocommerce_order_items (
   order_item_id BIGINT UNSIGNED NOT NULL auto_increment,
   order_item_name TEXT NOT NULL,
   order_item_type varchar(200) NOT NULL DEFAULT '',
@@ -610,7 +610,7 @@ CREATE TABLE {$wpdb->prefix}woocommerce_order_items (
   PRIMARY KEY  (order_item_id),
   KEY order_id (order_id)
 ) $collate;
-CREATE TABLE {$wpdb->prefix}woocommerce_order_itemmeta (
+CREATE TABLE 6woo_{$wpdb->prefix}woocommerce_order_itemmeta (
   meta_id BIGINT UNSIGNED NOT NULL auto_increment,
   order_item_id BIGINT UNSIGNED NOT NULL,
   meta_key varchar(255) default NULL,
@@ -999,8 +999,8 @@ CREATE TABLE {$wpdb->prefix}woocommerce_termmeta (
 		$tables[] = $wpdb->prefix . 'woocommerce_termmeta';
 		$tables[] = $wpdb->prefix . 'woocommerce_tax_rates';
 		$tables[] = $wpdb->prefix . 'woocommerce_tax_rate_locations';
-		$tables[] = $wpdb->prefix . 'woocommerce_order_items';
-		$tables[] = $wpdb->prefix . 'woocommerce_order_itemmeta';
+		$tables[] = "6woo_".$wpdb->prefix."woocommerce_order_items";
+		$tables[] = "6woo_".$wpdb->prefix."woocommerce_order_itemmeta";
 		$tables[] = $wpdb->prefix . 'woocommerce_payment_tokens';
 		$tables[] = $wpdb->prefix . 'woocommerce_shipping_zones';
 		$tables[] = $wpdb->prefix . 'woocommerce_shipping_zone_locations';

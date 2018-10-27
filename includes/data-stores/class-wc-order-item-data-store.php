@@ -23,7 +23,7 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	public function add_order_item( $order_id, $item ) {
 		global $wpdb;
 		$wpdb->insert(
-			$wpdb->prefix . "woocommerce_order_items",
+			"6woo_".$wpdb->prefix."woocommerce_order_items",
 			array(
 				'order_item_name'       => $item['order_item_name'],
 				'order_item_type'       => $item['order_item_type'],
@@ -49,7 +49,7 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	 */
 	public function update_order_item( $item_id, $item ) {
 		global $wpdb;
-		return $wpdb->update( $wpdb->prefix . 'woocommerce_order_items', $item, array( 'order_item_id' => $item_id ) );
+		return $wpdb->update( "6woo_".$wpdb->prefix."woocommerce_order_items", $item, array( 'order_item_id' => $item_id ) );
 	}
 
 	/**
@@ -60,8 +60,8 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	 */
 	public function delete_order_item( $item_id ) {
 		global $wpdb;
-		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d", $item_id ) );
-		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->prefix}woocommerce_order_itemmeta WHERE order_item_id = %d", $item_id ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM 6woo_{$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d", $item_id ) );
+		$wpdb->query( $wpdb->prepare( "DELETE FROM 6woo_{$wpdb->prefix}woocommerce_order_itemmeta WHERE order_item_id = %d", $item_id ) );
 	}
 
 	/**
@@ -129,7 +129,7 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	function get_order_id_by_order_item_id( $item_id ) {
 		global $wpdb;
 		return (int) $wpdb->get_var( $wpdb->prepare(
-			"SELECT order_id FROM {$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d",
+			"SELECT order_id FROM 6woo_{$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d",
 			$item_id
 		) );
 	}
@@ -143,7 +143,7 @@ class WC_Order_Item_Data_Store implements WC_Order_Item_Data_Store_Interface {
 	 */
 	public function get_order_item_type( $item_id ) {
 		global $wpdb;
-		$item_data = $wpdb->get_row( $wpdb->prepare( "SELECT order_item_type FROM {$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d LIMIT 1;", $item_id ) );
+		$item_data = $wpdb->get_row( $wpdb->prepare( "SELECT order_item_type FROM 6woo_{$wpdb->prefix}woocommerce_order_items WHERE order_item_id = %d LIMIT 1;", $item_id ) );
 		return $item_data->order_item_type;
 	}
 }

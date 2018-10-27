@@ -314,9 +314,9 @@ class WC_Order_Data_Store_CPT extends Abstract_WC_Order_Data_Store_CPT implement
 		$total = $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT SUM( order_itemmeta.meta_value )
-				FROM {$wpdb->prefix}woocommerce_order_itemmeta AS order_itemmeta
+				FROM 6woo_{$wpdb->prefix}woocommerce_order_itemmeta AS order_itemmeta
 				INNER JOIN $wpdb->posts AS posts ON ( posts.post_type = 'shop_order_refund' AND posts.post_parent = %d )
-				INNER JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON ( order_items.order_id = posts.ID AND order_items.order_item_type = 'tax' )
+				INNER JOIN 6woo_{$wpdb->prefix}woocommerce_order_items AS order_items ON ( order_items.order_id = posts.ID AND order_items.order_item_type = 'tax' )
 				WHERE order_itemmeta.order_item_id = order_items.order_item_id
 				AND order_itemmeta.meta_key IN ('tax_amount', 'shipping_tax_amount')",
 				$order->get_id()
@@ -338,9 +338,9 @@ class WC_Order_Data_Store_CPT extends Abstract_WC_Order_Data_Store_CPT implement
 		$total = $wpdb->get_var(
 			$wpdb->prepare(
 				"SELECT SUM( order_itemmeta.meta_value )
-				FROM {$wpdb->prefix}woocommerce_order_itemmeta AS order_itemmeta
+				FROM 6woo_{$wpdb->prefix}woocommerce_order_itemmeta AS order_itemmeta
 				INNER JOIN $wpdb->posts AS posts ON ( posts.post_type = 'shop_order_refund' AND posts.post_parent = %d )
-				INNER JOIN {$wpdb->prefix}woocommerce_order_items AS order_items ON ( order_items.order_id = posts.ID AND order_items.order_item_type = 'shipping' )
+				INNER JOIN 6woo_{$wpdb->prefix}woocommerce_order_items AS order_items ON ( order_items.order_id = posts.ID AND order_items.order_item_type = 'shipping' )
 				WHERE order_itemmeta.order_item_id = order_items.order_item_id
 				AND order_itemmeta.meta_key IN ('cost')",
 				$order->get_id()
@@ -507,7 +507,7 @@ class WC_Order_Data_Store_CPT extends Abstract_WC_Order_Data_Store_CPT implement
 					$wpdb->get_col(
 						$wpdb->prepare(
 							"SELECT order_id
-							FROM {$wpdb->prefix}woocommerce_order_items as order_items
+							FROM 6woo_{$wpdb->prefix}woocommerce_order_items as order_items
 							WHERE order_item_name LIKE %s",
 							'%' . $wpdb->esc_like( wc_clean( $term ) ) . '%'
 						)
@@ -751,6 +751,6 @@ class WC_Order_Data_Store_CPT extends Abstract_WC_Order_Data_Store_CPT implement
 	 */
 	public function get_order_item_type( $order, $order_item_id ) {
 		global $wpdb;
-		return $wpdb->get_var( $wpdb->prepare( "SELECT DISTINCT order_item_type FROM {$wpdb->prefix}woocommerce_order_items WHERE order_id = %d and order_item_id = %d;", $order->get_id(), $order_item_id ) );
+		return $wpdb->get_var( $wpdb->prepare( "SELECT DISTINCT order_item_type FROM 6woo_{$wpdb->prefix}woocommerce_order_items WHERE order_id = %d and order_item_id = %d;", $order->get_id(), $order_item_id ) );
 	}
 }

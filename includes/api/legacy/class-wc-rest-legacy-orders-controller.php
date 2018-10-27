@@ -64,8 +64,8 @@ class WC_REST_Legacy_Orders_Controller extends WC_REST_CRUD_Controller {
 		if ( ! empty( $request['product'] ) ) {
 			$order_ids = $wpdb->get_col( $wpdb->prepare( "
 				SELECT order_id
-				FROM {$wpdb->prefix}woocommerce_order_items
-				WHERE order_item_id IN ( SELECT order_item_id FROM {$wpdb->prefix}woocommerce_order_itemmeta WHERE meta_key = '_product_id' AND meta_value = %d )
+				FROM 6woo_{$wpdb->prefix}woocommerce_order_items
+				WHERE order_item_id IN ( SELECT order_item_id FROM 6woo_{$wpdb->prefix}woocommerce_order_itemmeta WHERE meta_key = '_product_id' AND meta_value = %d )
 				AND order_item_type = 'line_item'
 			 ", $request['product'] ) );
 

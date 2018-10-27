@@ -453,10 +453,10 @@ class WC_Post_Data {
 			do_action( 'woocommerce_delete_order_items', $postid );
 
 			$wpdb->query( "
-				DELETE {$wpdb->prefix}woocommerce_order_items, {$wpdb->prefix}woocommerce_order_itemmeta
-				FROM {$wpdb->prefix}woocommerce_order_items
-				JOIN {$wpdb->prefix}woocommerce_order_itemmeta ON {$wpdb->prefix}woocommerce_order_items.order_item_id = {$wpdb->prefix}woocommerce_order_itemmeta.order_item_id
-				WHERE {$wpdb->prefix}woocommerce_order_items.order_id = '{$postid}';
+				DELETE 6woo_{$wpdb->prefix}woocommerce_order_items, 6woo_{$wpdb->prefix}woocommerce_order_itemmeta
+				FROM 6woo_{$wpdb->prefix}woocommerce_order_items
+				JOIN 6woo_{$wpdb->prefix}woocommerce_order_itemmeta ON 6woo_{$wpdb->prefix}woocommerce_order_items.order_item_id = 6woo_{$wpdb->prefix}woocommerce_order_itemmeta.order_item_id
+				WHERE 6woo_{$wpdb->prefix}woocommerce_order_items.order_id = '{$postid}';
 				" );
 
 			do_action( 'woocommerce_deleted_order_items', $postid );

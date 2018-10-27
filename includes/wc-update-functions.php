@@ -277,7 +277,7 @@ function wc_update_200_line_items() {
 				if ( count( $meta_rows ) > 0 ) {
 					$wpdb->query(
 						$wpdb->prepare(
-							"INSERT INTO {$wpdb->prefix}woocommerce_order_itemmeta ( order_item_id, meta_key, meta_value )
+							"INSERT INTO 6woo_{$wpdb->prefix}woocommerce_order_itemmeta ( order_item_id, meta_key, meta_value )
 							VALUES " . implode( ',', $meta_rows ) . ';', // @codingStandardsIgnoreLine
 							$order_item_row->post_id
 						)
@@ -1156,8 +1156,8 @@ function wc_update_260_refunds() {
 	 * Refund item qty should be negative.
 	 */
 	$wpdb->query(
-		"UPDATE {$wpdb->prefix}woocommerce_order_itemmeta as item_meta
-		LEFT JOIN {$wpdb->prefix}woocommerce_order_items as items ON item_meta.order_item_id = items.order_item_id
+		"UPDATE 6woo_{$wpdb->prefix}woocommerce_order_itemmeta as item_meta
+		LEFT JOIN 6woo_{$wpdb->prefix}woocommerce_order_items as items ON item_meta.order_item_id = items.order_item_id
 		LEFT JOIN {$wpdb->posts} as posts ON items.order_id = posts.ID
 		SET item_meta.meta_value = item_meta.meta_value * -1
 		WHERE item_meta.meta_value > 0 AND item_meta.meta_key = '_qty' AND posts.post_type = 'shop_order_refund'"
